@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de la Vie</title>
     <link rel="stylesheet" href="{% static 'css/gameScreen.css' %}">
+    <script src="{% static 'js/initGame.js' %}"></script>
+    <script src="{% static 'js/gameManager.js' %}"></script>
+
 </head>
 
 <body>
@@ -18,43 +21,45 @@
     </div>
     <div class="container">
         <div class="game-area">
-            <!-- Contenu du jeu ici -->
+            <!-- Grille de jeu -->
+            <div class="game-grid"></div> 
         </div>
-<div class="info-area">
-    <h2>Jeu de la Vie</h2>
-    <div class="chat-container">
-        <div class="chat-messages"></div>
-        <div class="chat-input">
-            <input type="text" placeholder="Tapez votre message ici..." />
-            <button class="send-btn">Envoyer</button>
+        <div class="info-area">
+            <h2>Jeu de la Vie</h2>
+            <div class="chat-container">
+                <div class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Tapez votre message ici..." />
+                    <button class="send-btn">Envoyer</button>
+                </div>
+            </div>
+            <div class="rules-area">
+                <label for="rule-select">Règle sélectionnée :</label>
+                <select id="rule-select">
+                    {% for rule in rules %}
+                    <option value="{{ rule.id }}">{{ rule.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="table-title">Liste des cellules vivantes</div>
+            <div class="cell-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>x</th>
+                            <th>y</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Lignes du tableau ici -->
+                    </tbody>
+                </table>
+            </div>
+            <button class="add-btn">+</button>
+            <button class="validate-btn">Valider</button>
         </div>
-    </div>
-    <div class ="rules-area">
-    <label for="rule-select">Règle sélectionnée :</label>
-    <select id="rule-select">
-        <option>Sélectionner une règle</option>
-        <!-- Options des règles ici -->
-    </select>
-    </div>
-    <div class="table-title">Liste des cellules vivantes</div>
-    <div class="cell-table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>x</th>
-                    <th>y</th>
-                    <th></th> 
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Lignes du tableau ici -->
-            </tbody>
-        </table>
-    </div>
-    <button class="add-btn">+</button> 
-    <button class="validate-btn">Valider</button>
-</div>
     </div>
 </body>
 

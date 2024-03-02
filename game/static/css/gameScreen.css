@@ -134,7 +134,7 @@ th,
 td {
     border: 1px solid #dee2e6;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 th {
@@ -185,4 +185,27 @@ th {
 
 .delete-btn:hover {
     background-color: #bd2130;
+}
+
+/* Grille de jeu */
+.game-grid {
+    width: 800px;
+    height: 800px;
+    display: grid;
+    grid-gap: 1px;
+    background-color: #fff;
+    border: 1px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 5%;
+}
+
+.game-grid .cell {
+    border: 1px solid #ddd;
+    background-color: #eee;
+    box-sizing: border-box;
+}
+
+.game-grid .cell.alive {
+    background-color: #333;
 }
