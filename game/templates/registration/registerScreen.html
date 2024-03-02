@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="{% static 'css/authentificationScreen.css' %}">
+</head>
+
+<body>
+    <div class="auth-container">
+        <h2>Inscription</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username.label_tag }} {{ form.username }}
+            {{ form.username.errors }}
+            {{ form.password1.label_tag }} {{ form.password1 }}
+            {{ form.password1.errors }}
+            {{ form.password2.label_tag }} {{ form.password2 }}
+            {{ form.password2.errors }}
+            <div class="password-help">
+                {{ form.password1.help_text.as_ul }}
+            </div>
+            <button type="submit">S'inscrire</button>
+        </form>
+        <div class="auth-switch">
+            Déjà inscrit(e) ? <a href="{% url 'login' %}">Connexion</a>
+        </div>
+    </div>
+</body>
+
+</html>
