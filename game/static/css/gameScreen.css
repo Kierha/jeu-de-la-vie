@@ -147,6 +147,22 @@ th {
     margin-top: auto;
 }
 
+
+.end-game-button button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1rem;
+}
+
+.end-game-button button:hover {
+    background-color: #c82333;
+}
+
 .add-btn,
 .validate-btn {
     background-color: #007bff;
@@ -209,3 +225,26 @@ th {
 .game-grid .cell.alive {
     background-color: #333;
 }
+
+h3 {
+    margin: 0;
+}
+
+.game-info {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.game-info span {
+    font-weight: bold;
+}
+
+.game-info br {
+    margin-bottom: 10px;
+}
+
