@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/gameScreen.css' %}">
     <script src="{% static 'js/initGame.js' %}"></script>
     <script src="{% static 'js/gameManager.js' %}"></script>
-
+    <script src="{% static 'js/tchat.js' %}"></script>
 </head>
 
 <body>
@@ -21,8 +21,7 @@
     </div>
     <div class="container">
         <div class="game-area">
-            <!-- Grille de jeu -->
-            <div class="game-grid"></div> 
+            <div class="game-grid"></div>
         </div>
         <div class="info-area">
             <h2>Jeu de la Vie</h2>
@@ -67,6 +66,13 @@
             <button class="validate-btn">Valider</button>
         </div>
     </div>
+
+    <script>
+        // Stocke le nom d'utilisateur dans le localStorage
+        {% if username %}
+        localStorage.setItem('username', '{{ username }}');
+        {% endif %}
+    </script>
 </body>
 
 </html>

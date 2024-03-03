@@ -4,7 +4,12 @@ from game.models import Rule
 
 def game_screen(request):
     rules = Rule.objects.all()
-    return render(request, 'game/gameScreen.html', {'rules': rules})
+    # Ajoute 'username' au contexte si l'utilisateur est authentifié
+    context = {
+        'rules': rules,
+        'username': request.user.username if request.user.is_authenticated else None
+    }
+    return render(request, 'game/gameScreen.html', context)
 
 def get_rule_details(request, rule_id):
     try:
