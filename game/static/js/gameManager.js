@@ -64,7 +64,7 @@ function drawGrid(gridSize) {
   const gameGrid = document.querySelector(".game-grid");
 
   // Taille de la grille
-  var gridDimensions = "800px";
+  var gridDimensions = "600px";
 
   // Ajuste les styles CSS pour les colonnes et les rangées de la grille
   gameGrid.style.display = "grid";
@@ -80,6 +80,7 @@ function drawGrid(gridSize) {
   for (let i = 0; i < gridSize * gridSize; i++) {
     let cell = document.createElement("div");
     cell.classList.add("cell");
+    gameGrid.appendChild(cell);
   }
 }
 
@@ -162,7 +163,6 @@ function updateStartPanel(
   });
 
   // Mets à jour les informations de la partie ici
-  console.log("Début d'une partie");
   document.getElementById("gameName").textContent =
     localStorage.getItem("config_name");
   document.getElementById("ruleName").textContent = selectedRuleText;
@@ -172,9 +172,8 @@ function updateStartPanel(
   addBtn.removeEventListener("click", addBtn);
 }
 
-function calculateNextState(cellCoordinates, gridSize) {
-  console.log("survivalRules: " + survival_rules);
-  console.log("birthRules: " + birth_rules);
+function calculateNextState(cellCoordinates, gridSize) { 
+  // Convertit les règles en tableaux de nombres
   const survivalRulesArray = survival_rules.split(",").map(Number);
   const birthRulesArray = birth_rules.split(",").map(Number);
 
@@ -250,8 +249,7 @@ function gameLoop(
   // Vérifie si l'état a changé
   if (arraysAreEqual(cellCoordinates, newCellCoordinates)) {
     // Si l'état n'a pas changé, arrêtez le jeu
-    alert("Aucune évolution possible.");
-    console.log("Aucun changement d'état possible, fin du jeu.");
+    alert("Aucune évolution possible, fin du jeu.");
     updateEndPanel(validateButton, ruleSelect, addBtn);
     return;
   }
@@ -279,7 +277,6 @@ function gameLoop(
 
 // Fonction utilitaire pour comparer deux tableaux d'objets {x, y}
 function arraysAreEqual(arr1, arr2) {
-  console.log(arr1.length, arr2.length);
   if (arr1.length !== arr2.length) return false;
   return arr1.every((obj1, index) => {
     const obj2 = arr2[index];
@@ -312,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("config_name", configName);
             survival_rules = data.survival_rules;
             birth_rules = data.birth_rules;
+
 
             var maxGridSize = getMaxSize(cellCoordinates);
             drawGrid(maxGridSize);

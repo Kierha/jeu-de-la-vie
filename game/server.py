@@ -1,6 +1,8 @@
 import asyncio
-import websockets
 import logging
+import websockets
+
+from django.core.management.base import BaseCommand
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,10 +18,15 @@ async def chat_server(websocket, path):
     finally:
         clients.remove(websocket)
 
-async def main():
-    port = 8765
-    start_server = websockets.serve(chat_server, "localhost", port)
-    logging.info(f"Le serveur démarre sur le port : {port}")
-    await start_server
+class Command(BaseCommand):
+    help = 'Starts a WebSocket server'
 
-asyncio.run(main())
+    def handle(self, *args, **options):
+        port = 8765  # Port to listen on
+        start_server = websockets.serve(chat_server, "localhost", port)
+        logging.info(f"Le serveur démarre sur le port : {port}")
+        asyncio.get_event_loop().run_until_complete(start_server)
+        asyncio.get_event_loop().run_forever()
+
+if __name__ == "__main__":
+    Command().handle()
