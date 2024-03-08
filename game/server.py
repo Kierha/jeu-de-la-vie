@@ -1,7 +1,6 @@
 import asyncio
 import logging
 import websockets
-
 from django.core.management.base import BaseCommand
 
 logging.basicConfig(level=logging.INFO)
@@ -12,9 +11,18 @@ async def chat_server(websocket, path):
     clients.add(websocket)
     try:
         async for message in websocket:
-            message_with_username = f"{message}"
-            for client in clients:
-                await client.send(message_with_username)
+            if message == "STOP_SERVER":
+                logging.info("Arrêt du serveur demandé.")
+                await websocket.close()
+                for client in clients:
+                    await client.close()
+                await websocket.wait_closed()
+                break
+            else:
+                message_with_username = f"{message}"
+                for client in clients:
+                    if client.open:
+                        await client.send(message_with_username)
     finally:
         clients.remove(websocket)
 
