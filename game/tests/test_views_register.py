@@ -19,7 +19,6 @@ class RegisterViewTests(TestCase):
         form_data = {'username': 'testuser', 'password1': 'testpassword123', 'password2': 'testpassword123'}
         response = self.client.post(reverse('register'), form_data)
         self.assertEqual(response.status_code, 302)  # Redirection après succès
-        # Ajoute des assertions supplémentaires ici pour vérifier la création de l'utilisateur
 
     def test_register_view_post_error(self):
         """
@@ -27,6 +26,6 @@ class RegisterViewTests(TestCase):
         """
         form_data = {'username': 'testuser', 'password1': 'testpassword123', 'password2': 'wrongconfirmation'}
         response = self.client.post(reverse('register'), form_data)
-        self.assertEqual(response.status_code, 200)  # Pas de redirection, reste sur la page pour afficher les erreurs
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('form' in response.context)
-        self.assertTrue(response.context['form'].errors)  # Assure-toi que le formulaire renvoie des erreurs
+        self.assertTrue(response.context['form'].errors)  
